@@ -6,7 +6,7 @@ from google.genai import types
 
 # 1. Load API Key
 API_KEY = os.getenv("GEMINI_API_KEY")
-MODEL_NAME = 'gemini-2.0-flash'
+MODEL_NAME = 'gemini-1.5-flash'
 
 if not API_KEY:
     print("❌ Error: GEMINI_API_KEY environment variable not set.")
@@ -36,7 +36,7 @@ def send_message_with_retry(chat_session, user_message, max_retries=3):
         except Exception as e:      #handles errors(internet,server down)
             error_str = str(e)
             if "503" in error_str or "429" in error_str:
-                wait_time = 2 ** attempt
+                wait_time = (2 ** attempt)+5
                 print(f"⚠️ Server busy (503/429). Retrying in {wait_time} seconds...")
                 time.sleep(wait_time)
             else:
@@ -84,3 +84,5 @@ while True:
         response_text = send_message_with_retry(chat, user_input)
     
     print("🤖 AI Chatbot:", response_text)
+
+
