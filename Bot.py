@@ -6,7 +6,7 @@ from google.genai import types
 
 # 1. Load API Key
 API_KEY = os.getenv("GEMINI_API_KEY")
-MODEL_NAME = 'gemini-1.5-flash'
+MODEL_NAME = 'gemini-2.5-flash'
 
 if not API_KEY:
     print("❌ Error: GEMINI_API_KEY environment variable not set.")
